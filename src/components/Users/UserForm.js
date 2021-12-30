@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 import Button from "../UI/Button";
 import Card from "../UI/Card";
@@ -72,7 +72,7 @@ const UserForm = (props) => {
     setUserAge(event.target.value);
   };
   return (
-    <React.Fragment>
+    <Fragment>
       {!isValidate && error && (
         <Modal
           msg={error.msg}
@@ -100,7 +100,7 @@ const UserForm = (props) => {
           <Button onClick={onCancelClickHandler}>Cancel</Button>
         </form>
       </Card>
-    </React.Fragment>
+    </Fragment>
   );
 };
 export default UserForm;
