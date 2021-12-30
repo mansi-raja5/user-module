@@ -1,9 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import Modal from "../UI/Modal";
-import Wrapper from "../Helpers/Wrapper";
 
 import userFormStyles from "./UserForm.module.css";
 
@@ -73,7 +72,7 @@ const UserForm = (props) => {
     setUserAge(event.target.value);
   };
   return (
-    <Wrapper>
+    <React.Fragment>
       {!isValidate && error && (
         <Modal
           msg={error.msg}
@@ -101,7 +100,7 @@ const UserForm = (props) => {
           <Button onClick={onCancelClickHandler}>Cancel</Button>
         </form>
       </Card>
-    </Wrapper>
+    </React.Fragment>
   );
 };
 export default UserForm;
