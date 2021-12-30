@@ -1,24 +1,24 @@
-import ModalStyles from "./Modal.module.css";
-import Button from "../UI/Button";
-import Card from "../UI/Card";
+import React from "react";
+import ReactDOM from "react-dom";
+import Backdrop from "./Backdrop";
+import Overlay from "./Overlay";
 
 const Modal = (props) => {
   return (
-    <div>
-      <div className={ModalStyles.backdrop} onClick={props.onOkayClick}>
-        <Card className={ModalStyles.modal}>
-          <header className={ModalStyles.header}>
-            <h2>{props.title}</h2>
-          </header>
-          <div className={ModalStyles.content}>
-            <p>{props.msg}</p>
-          </div>
-          <footer className={ModalStyles.actions}>
-            <Button onClick={props.onOkayClick}>Okay</Button>
-          </footer>
-        </Card>
-      </div>
-    </div>
+    <React.Fragment>
+      {ReactDOM.createPortal(
+        <Backdrop onOkayClick={props.onOkayClick} />,
+        document.getElementById("backdrop-root")
+      )}
+      {ReactDOM.createPortal(
+        <Overlay
+          title={props.title}
+          msg={props.msg}
+          onOkayClick={props.onOkayClick}
+        />,
+        document.getElementById("overlay-root")
+      )}
+    </React.Fragment>
   );
 };
 
