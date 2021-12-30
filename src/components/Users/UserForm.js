@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef } from "react";
 
 import Button from "../UI/Button";
 import Card from "../UI/Card";
@@ -7,8 +7,9 @@ import Modal from "../UI/Modal";
 import userFormStyles from "./UserForm.module.css";
 
 const UserForm = (props) => {
-  const [userName, setUserName] = useState("mansi");
-  const [userAge, setUserAge] = useState(15);
+  const inputNameRef = useRef();
+  const inputAgeRef = useRef();
+
   const [isValidate, setIsValidate] = useState();
   const [error, setError] = useState();
 
@@ -18,12 +19,14 @@ const UserForm = (props) => {
   };
 
   const onCancelClickHandler = () => {
-    setUserName("");
-    setUserAge("");
+    inputNameRef.current.value = "";
+    inputAgeRef.current.value = "";
   };
 
   const addUserHandler = (event) => {
     event.preventDefault();
+    const userName = inputNameRef.current.value;
+    const userAge = inputAgeRef.current.value;
     if (userName.trim().length === 0 && userAge.length === 0) {
       setIsValidate(false);
       setError({
@@ -60,17 +63,9 @@ const UserForm = (props) => {
       userAge: userAge,
     };
     props.onAddUser(userData);
-    setUserName("");
-    setUserAge("");
+    onCancelClickHandler();
   };
 
-  const userNameHandler = (event) => {
-    setUserName(event.target.value);
-  };
-
-  const userAgeHandler = (event) => {
-    setUserAge(event.target.value);
-  };
   return (
     <Fragment>
       {!isValidate && error && (
@@ -83,19 +78,9 @@ const UserForm = (props) => {
       <Card className={userFormStyles.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            value={userName}
-            onChange={userNameHandler}
-          />
+          <input id="username" type="text" ref={inputNameRef} />
           <label htmlFor="userage">Age (years)</label>
-          <input
-            id="userage"
-            type="number"
-            value={userAge}
-            onChange={userAgeHandler}
-          />
+          <input id="userage" type="number" ref={inputAgeRef} />
           <Button buttonType="submit">Submit</Button>
           <Button onClick={onCancelClickHandler}>Cancel</Button>
         </form>
