@@ -1,10 +1,10 @@
-import userItemStyles from './UserItem.module.css'
+import userItemStyles from "./UserItem.module.css";
 
 const UserItem = (props) => {
   return (
-    <div className={userItemStyles.user}>
-      {props.userName}({props.userAge})
-    </div>
+    <li className={userItemStyles.user}>
+      {props.userName} is {props.userAge} years old!
+    </li>
   );
 };
 

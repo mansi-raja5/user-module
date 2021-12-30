@@ -80,15 +80,15 @@ const UserForm = (props) => {
           onOkayClick={onOkayClickHandler}
         />
       )}
-      <Card>
-        <form className={userFormStyles.input} onSubmit={addUserHandler}>
+      <Card className={userFormStyles.input}>
+        <form onSubmit={addUserHandler}>
           <div>
-            <label>Username</label>
-            <input value={userName} onChange={userNameHandler} />
+            <label htmlFor="username">Username</label>
+            <input id="username" type="text" value={userName} onChange={userNameHandler} />
           </div>
           <div>
-            <label>Age (years)</label>
-            <input value={userAge} onChange={userAgeHandler} />
+            <label htmlFor="userage">Age (years)</label>
+            <input id="userage" type="number" value={userAge} onChange={userAgeHandler} />
           </div>
           <Button buttonType="submit">Submit</Button>
           <Button onClick={onCancelClickHandler}>Cancel</Button>
