@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import Modal from "../UI/Modal";
+import Wrapper from "../Helpers/Wrapper";
 
 import userFormStyles from "./UserForm.module.css";
 
@@ -72,7 +73,7 @@ const UserForm = (props) => {
     setUserAge(event.target.value);
   };
   return (
-    <div>
+    <Wrapper>
       {!isValidate && error && (
         <Modal
           msg={error.msg}
@@ -82,19 +83,25 @@ const UserForm = (props) => {
       )}
       <Card className={userFormStyles.input}>
         <form onSubmit={addUserHandler}>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" value={userName} onChange={userNameHandler} />
-          </div>
-          <div>
-            <label htmlFor="userage">Age (years)</label>
-            <input id="userage" type="number" value={userAge} onChange={userAgeHandler} />
-          </div>
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            value={userName}
+            onChange={userNameHandler}
+          />
+          <label htmlFor="userage">Age (years)</label>
+          <input
+            id="userage"
+            type="number"
+            value={userAge}
+            onChange={userAgeHandler}
+          />
           <Button buttonType="submit">Submit</Button>
           <Button onClick={onCancelClickHandler}>Cancel</Button>
         </form>
       </Card>
-    </div>
+    </Wrapper>
   );
 };
 export default UserForm;
