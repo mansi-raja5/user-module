@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./Login.module.css";
@@ -12,11 +12,13 @@ const Login = (props) => {
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
-
-    setFormIsValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > 6
-    );
   };
+
+  useEffect(() => {
+    setFormIsValid(
+      enteredEmail.includes("@") && enteredPassword.trim().length > 6
+    );
+  }, [enteredEmail, enteredPassword]);
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
