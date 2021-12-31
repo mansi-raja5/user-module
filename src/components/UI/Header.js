@@ -1,3 +1,4 @@
+import Login from "../Login/Login";
 import Button from "./Button";
 import Card from "./Card";
 
@@ -5,13 +6,15 @@ import classes from "./Header.module.css";
 
 const Header = (props) => {
   return (
-    <Card className={classes.header}>
+    <>
       {props.isLoggedIn ? (
-        <Button onClick={props.onSignOut}>SIGN OUT</Button>
+        <Card className={classes.header}>
+          <Button onClick={props.onSignOut}>SIGN OUT</Button>
+        </Card>
       ) : (
-        <Button onClick={props.onSignIn}>SIGN IN</Button>
+        <Login onSignIn={props.onSignIn} />
       )}
-    </Card>
+    </>
   );
 };
 
