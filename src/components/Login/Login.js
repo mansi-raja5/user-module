@@ -16,6 +16,37 @@ const Login = (props) => {
   };
 
   useEffect(() => {
+    console.log("I'll run on every state change!");
+
+    return () => {
+      console.log(
+        "Effect Cleanup! I'll trigger on every state change, before useEffect runs but not for the first time!"
+      );
+    };
+  });
+
+  useEffect(() => {
+    console.log("I'll run only once!");
+
+    return () => {
+      console.log(
+        "Effect Cleanup! I'll trigger when the component is removed from the DOM!"
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      "I'll run only when enteredEmail variable changes its state and component re-evaluates!"
+    );
+    return () => {
+      console.log(
+        "Effect Cleanup! I'll trigger when enteredEmail variable changes its state, before useEffects but not for the first time!"
+      );
+    };
+  }, [enteredEmail]);
+
+  useEffect(() => {
     console.log("inside effect ");
     const identifier = setTimeout(() => {
       console.log("checking form valifity!");
