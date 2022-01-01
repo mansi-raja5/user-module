@@ -3,6 +3,7 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./Login.module.css";
 
+let counter = 0;
 const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [emailIsValid, setEmailIsValid] = useState();
@@ -15,9 +16,21 @@ const Login = (props) => {
   };
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6
-    );
+    console.log("inside effect ");
+    const identifier = setTimeout(() => {
+      console.log("checking form valifity!");
+      console.log(counter++);
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 5000);
+
+    return () => {
+      console.log(
+        "clean up! This will be executed once effect is executed previously! so this will start from second useeffect execution!"
+      );
+      clearTimeout(identifier);
+    };
   }, [enteredEmail, enteredPassword]);
 
   const passwordChangeHandler = (event) => {
