@@ -54,16 +54,25 @@ const Login = (props) => {
     isValid: null,
   });
 
+  /*//Object De-structuring
+  //Pull out certain property of object
+  const { objectProperty } = object;
+  //Pull out certain property of object and assign alias to it.
+  const { objectProperty: VariableName } = object;*/
+
+  const { isValid: emailIsValid } = email;
+  const { isValid: passwordIsValid } = password;
+
   useEffect(() => {
     console.log("Checking Form validity!");
     const identifier = setTimeout(() => {
-      setFormIsValid(email.isValid && password.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [email.isValid, password.isValid]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
